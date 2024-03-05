@@ -1,0 +1,12 @@
+export 'main_screen.dart';
+export 'movie_detail_screen.dart';
+export 'movie_list_screen.dart';
+export 'select_movie_time_screen.dart';
+export 'select_seat_screen.dart';
+export 'splash_screen.dart';
+export 'login_screen.dart';
+export 'registration_screen.dart';
+export 'main_screen/bioskop_screen.dart';
+export 'main_screen/home_screen.dart';
+export 'main_screen/profil_screen.dart';
+export 'main_screen/ticket_screen.dart';

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NontonForm extends StatelessWidget {
+class NontonTextFieldWidget extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final bool obscureText;
+  final TextEditingController controller;
+  final FormFieldValidator<String?>? validator;
 
-  const NontonForm({
+  const NontonTextFieldWidget({
     super.key,
     required this.hintText,
     required this.icon,
+    this.obscureText = false,
+    required this.controller,
+    this.validator,
   });
 
   @override
@@ -15,6 +21,7 @@ class NontonForm extends StatelessWidget {
     return Container(
       color: const Color(0xFF2F2C44),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
           hintText: hintText,
@@ -22,6 +29,8 @@ class NontonForm extends StatelessWidget {
           prefixIcon: Icon(icon),
           prefixIconColor: Colors.white24,
         ),
+        obscureText: obscureText,
+        validator: validator,
       ),
     );
   }
