@@ -1,12 +1,19 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_basic/constants/app_images.dart';
 import 'package:flutter_basic/constants/route_constant.dart';
 import 'package:flutter_basic/data/movie.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../widgets/banner_widget.dart';
+import '../../widgets/home_top_bar_widget.dart';
+import '../../widgets/now_playing_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,12 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // moviesData = dummyMoviesMap
         //     .map((element) => Movie(title: element['title'] ?? '', thumbnailUrl: element['thumbnail'] ?? ''))
         //     .toList();
-
         moviesData = dummyMoviesMap.map((element) => Movie.fromMap(element)).toList();
-      });
-
-      setState(() {
-        moviesData = [];
       });
     });
     super.initState();
@@ -49,87 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        FlutterCarousel(
-          options: CarouselOptions(
-            height: 400.0,
-            showIndicator: true,
-            slideIndicator: const CircularSlideIndicator(),
-          ),
-          items: [1, 2, 3, 4, 5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: const BoxDecoration(color: Colors.amber),
-                  child: Text(
-                    'text $i',
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                );
-              },
-            );
-          }).toList(),
-        ),
-        const Row(
-          children: [
-            SizedBox(width: 16),
-            Text('Sedang Tayang'),
-            Expanded(child: SizedBox()),
-            Text('Lihat Semua'),
-            SizedBox(width: 16),
-          ],
-        ),
-        SizedBox(
-          height: 240,
-          width: double.infinity,
-          child: moviesData == null
-              ? const Center(
-                  child: SizedBox(height: 40, width: 40, child: CircularProgressIndicator()),
-                )
-              : moviesData!.isEmpty
-                  ? const Text('Tidak ada film tersedia.')
-                  : ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 8,
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(width: 14);
-                      },
-                      itemBuilder: (context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            context.goNamed(
-                              RouteConstant.movieDetail,
-                              pathParameters: {
-                                'movieId': 'Movie-$index',
-                              },
-                            );
-                          },
-                          child: Container(
-                            width: 100,
-                            child: Column(
-                              children: [
-                                Image.network(
-                                  moviesData?[index].thumbnailUrl ?? '',
-                                  height: 200,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                                Text(
-                                  moviesData?[index].title ?? '',
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-        )
+        const SizedBox(height: 20),
+        const HomeTopBarWidget(),
+        const SizedBox(height: 20),
+        const BannerWidget(),
+        const SizedBox(height: 30),
+        NowPlayingWidget(moviesData: moviesData),
+        const SizedBox(height: 30),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_basic/constants/app_colors.dart';
 import 'package:flutter_basic/constants/route_constant.dart';
 import 'package:go_router/go_router.dart';
 
+import 'data/movie.dart';
 import 'screen/screen.dart';
 
 void main() {
@@ -59,10 +60,25 @@ class MyApp extends StatelessWidget {
                   String movieId = state.pathParameters['movieId'] as String;
                   return MovieDetailScreen(
                     movieId: movieId,
+                    movie: state.extra as Movie,
                   );
                 },
               ),
             ],
+          ),
+          GoRoute(
+            path: '/order_date',
+            name: RouteConstant.selectMovieTime,
+            builder: (BuildContext context, GoRouterState state) {
+              return SelectMovieTimeScreen(
+                movie: state.extra as Movie,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/order_seat',
+            name: RouteConstant.selectMovieSeat,
+            builder: (BuildContext context, GoRouterState state) => const SelectSeatScreen(),
           ),
         ],
       ),
