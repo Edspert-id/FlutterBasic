@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Basic',
       theme: ThemeData(
         useMaterial3: true,
+        fontFamily: 'Rale way',
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.deepPurple,
           brightness: Brightness.dark,
@@ -64,21 +65,21 @@ class MyApp extends StatelessWidget {
                   );
                 },
               ),
+              GoRoute(
+                path: 'order_date',
+                name: RouteConstant.selectMovieTime,
+                builder: (BuildContext context, GoRouterState state) {
+                  return SelectMovieTimeScreen(
+                    movie: state.extra as Movie,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'order_seat',
+                name: RouteConstant.selectMovieSeat,
+                builder: (BuildContext context, GoRouterState state) => const SelectSeatScreen(),
+              ),
             ],
-          ),
-          GoRoute(
-            path: '/order_date',
-            name: RouteConstant.selectMovieTime,
-            builder: (BuildContext context, GoRouterState state) {
-              return SelectMovieTimeScreen(
-                movie: state.extra as Movie,
-              );
-            },
-          ),
-          GoRoute(
-            path: '/order_seat',
-            name: RouteConstant.selectMovieSeat,
-            builder: (BuildContext context, GoRouterState state) => const SelectSeatScreen(),
           ),
         ],
       ),
