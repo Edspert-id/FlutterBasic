@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/router/router.dart';
 import 'package:flutter_basic/ui/screens/login_screen.dart';
 import 'package:flutter_basic/values/app_images.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../values/app_colors.dart';
 import '../widgets/logo_image_widget.dart';
@@ -15,12 +17,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3)).then((value) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => LoginScreen(),
-        ),
-      );
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      print('initState go to login??');
+      context.go(RoutePaths.login);
     });
     super.initState();
   }

@@ -1,22 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_basic/router/router.dart';
 import 'package:flutter_basic/values/app_colors.dart';
 import 'package:flutter_basic/values/app_strings.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../router/router.dart';
 import '../widgets/logo_image_widget.dart';
 import '../widgets/primary_button_widget.dart';
 import '../widgets/primary_textfield_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onTap: () {
             context.go(RoutePaths.home);
           },
-          text: AppStrings.masuk,
+          text: AppStrings.daftar,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 94,
               ),
               const Text(
-                AppStrings.masuk,
+                AppStrings.daftar,
                 style: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 children: [
                   Text(
-                    '${AppStrings.belumPunyaAkun} ',
+                    '${AppStrings.sudahPunyaAkun} ',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white.withOpacity(0.6),
@@ -88,10 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.go(RoutePaths.register);
+                      context.go(RoutePaths.login);
                     },
                     child: const Text(
-                      AppStrings.daftar,
+                      AppStrings.masuk,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.white,
@@ -99,6 +99,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '${AppStrings.belumPunyaAkun} ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white.withOpacity(0.6),
+                        ),
+                      ),
+                      const TextSpan(
+                        text: AppStrings.daftar,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 200,
